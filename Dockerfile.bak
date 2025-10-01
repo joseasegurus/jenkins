@@ -1,2 +1,9 @@
 FROM jenkins/jenkins:lts
-ENV JENKINS_OPTS="--httpPort=$PORT"
+
+USER root
+
+# Render pasa el puerto en la variable de entorno PORT
+ENV JENKINS_HOME=/var/jenkins_home
+
+# Comando de arranque: usar el puerto asignado por Render
+CMD ["sh", "-c", "java -jar /usr/share/jenkins/jenkins.war --httpPort=$PORT"]
